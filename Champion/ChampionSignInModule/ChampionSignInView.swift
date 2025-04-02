@@ -32,7 +32,7 @@ struct ChampionSignInView: View {
                                 
                                 CustomTextFiled(text: $championSignInModel.phone,
                                                 geometry: geometry,
-                                                placeholder: "Enter your email")
+                                                placeholder: "Enter your phone number")
                             }
                             
                             VStack(spacing: 10) {

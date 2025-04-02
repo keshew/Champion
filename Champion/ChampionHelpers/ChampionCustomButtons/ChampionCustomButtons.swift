@@ -212,70 +212,7 @@ struct FulledModelTask: View {
     }
 }
 
-struct CalendarDayCell: View {
-    let text: String
-    var isCurrentMonth: Bool = true
-    var isToday: Bool = false
-    var date: Date
-    @ObservedObject var sportCalendarModel: ChampionCalendarViewModel
-    var userDefaultsManager = UserDefaultsManager()
-    var geometry: GeometryProxy
-    
-    var body: some View {
-        ZStack {
-            VStack(spacing: 4) {
-                Text(text)
-                    .Pop(size: 14, color: textColor)
-                
-                HStack(spacing: 2) {
-                    if let tasks = userDefaultsManager.loadTasks() {
-                        let tasksForDate = tasks.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
-                        ForEach(tasksForDate.prefix(3), id: \.id) { task in
-                            Circle()
-                                .fill(getColor(for: task.typeActivity))
-                                .frame(width: 6, height: 6)
-                        }
-                    }
-                }
-            }
-            .frame(width: 45,
-                   height: 33)
-        }
-    }
-    
-    private func getColor(for type: TypeActivity) -> Color {
-        switch type {
-        case .dev:
-            return Color(red: 0/255, green: 32/255, blue: 134/255)
-        case .dev1:
-            return Color(red: 0/255, green: 77/255, blue: 135/255)
-        case .dev2:
-            return Color(red: 77/255, green: 0/255, blue: 116/255)
-        case .dev3:
-            return Color(red: 0/255, green: 32/255, blue: 134/255)
-        case .dev4:
-            return Color(red: 0/255, green: 77/255, blue: 135/255)
-        case .dev5:
-            return Color(red: 52/255, green: 0/255, blue: 135/255)
-        case .dev6:
-            return Color(red: 0/255, green: 32/255, blue: 134/255)
-        case .dev7:
-            return Color(red: 77/255, green: 0/255, blue: 116/255)
-        case .dev8:
-            return Color(red: 0/255, green: 77/255, blue: 135/255)
-        case .dev9:
-            return Color(red: 0/255, green: 77/255, blue: 135/255)
-        }
-    }
-    
-    private var textColor: Color {
-        if sportCalendarModel.isDateInPast(date) {
-            return Color(red: 77/255, green: 77/255, blue: 136/255)
-        } else {
-            return Color.white
-        }
-    }
-}
+
 
 struct CustomTextFiled: View {
     @Binding var text: String
