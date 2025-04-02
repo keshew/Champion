@@ -1,17 +1,20 @@
-//
-//  ChampionApp.swift
-//  Champion
-//
-//  Created by Артём Коротков on 31.03.2025.
-//
-
 import SwiftUI
 
 @main
 struct ChampionApp: App {
+    @StateObject var notificationManager = NotificationManager()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if UserDefaultsManager().checkLogin() {
+                ChampionTabBarView()
+            } else {
+                ChampionSignInView()
+                    .onAppear {
+                        UserDefaultsManager().quitQuest()
+                        notificationManager.requestPermission { granted in
+                        }
+                    }
+            }
         }
     }
 }
