@@ -75,7 +75,8 @@ struct ChampionCreateActivityView: View {
                         ZStack {
                             Rectangle()
                                 .fill(Color(red: 26/255, green: 26/255, blue: 101/255))
-                                .frame(height: 138)
+                                .frame(height: getPosition(for: geometry.size.width,
+                                                           geometry: geometry))
                                 .cornerRadius(8)
                             
                             VStack {
@@ -215,8 +216,69 @@ struct ChampionCreateActivityView: View {
             }
         }
     }
+    func getPosition(for width: CGFloat, geometry: GeometryProxy) -> CGFloat {
+        if width > 850 {
+            return 198
+        } else if width > 650 {
+            return 178
+          } else if width > 400 {
+              return 138
+          } else if width < 380 {
+              return 138
+          } else {
+              return 138
+          }
+      }
 }
 
+struct WeekCalendarDayCell: View {
+    let text: String
+    let isToday: Bool
+    let isSelected: Bool
+    let geometry: GeometryProxy
+    let onSelect: () -> Void
+    let date: Date
+    var body: some View {
+        Button(action: onSelect) {
+            VStack {
+                ZStack {
+                    if isSelected {
+                        Circle()
+                            .fill(Color(red: 0/255, green: 255/255, blue: 255/255))
+                            .frame(width: 30, height: 30)
+                    }
+                    
+                    Text(text)
+                        .Pop(size: 14, color: isSelected ? .black : getColor())
+                }
+            }
+            .padding(.vertical, 8)
+            .frame(width: geometry.size.width * 0.14)
+        }
+        .buttonStyle(.plain)
+        .disabled(isDisabled())
+    }
+    
+    private func getColor() -> Color {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let cellDate = calendar.startOfDay(for: date)
+        
+        if calendar.compare(cellDate, to: today, toGranularity: .day) == .orderedAscending {
+            return Color(red: 95/255, green: 95/255, blue: 148/255)
+        } else {
+            return .white
+        }
+    }
+    
+    private func isDisabled() -> Bool {
+            let calendar = Calendar.current
+            let today = calendar.startOfDay(for: Date())
+            let cellDate = calendar.startOfDay(for: date)
+            
+            return calendar.compare(cellDate, to: today, toGranularity: .day) == .orderedAscending
+        }
+}
 
 #Preview {
     ChampionCreateActivityView()

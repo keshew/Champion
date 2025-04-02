@@ -106,54 +106,7 @@ struct SimpleDropDownView: View {
 }
 
 
-struct WeekCalendarDayCell: View {
-    let text: String
-    let isToday: Bool
-    let isSelected: Bool
-    let geometry: GeometryProxy
-    let onSelect: () -> Void
-    let date: Date
-    var body: some View {
-        Button(action: onSelect) {
-            VStack {
-                ZStack {
-                    if isSelected {
-                        Circle()
-                            .fill(Color(red: 0/255, green: 255/255, blue: 255/255))
-                            .frame(width: 30, height: 30)
-                    }
-                    
-                    Text(text)
-                        .Pop(size: 14, color: isSelected ? .black : getColor())
-                }
-            }
-            .padding(.vertical, 8)
-            .frame(width: geometry.size.width * 0.14)
-        }
-        .buttonStyle(.plain)
-        .disabled(isDisabled())
-    }
-    
-    private func getColor() -> Color {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        let cellDate = calendar.startOfDay(for: date)
-        
-        if calendar.compare(cellDate, to: today, toGranularity: .day) == .orderedAscending {
-            return Color(red: 95/255, green: 95/255, blue: 148/255)
-        } else {
-            return .white
-        }
-    }
-    
-    private func isDisabled() -> Bool {
-            let calendar = Calendar.current
-            let today = calendar.startOfDay(for: Date())
-            let cellDate = calendar.startOfDay(for: date)
-            
-            return calendar.compare(cellDate, to: today, toGranularity: .day) == .orderedAscending
-        }
-}
+
 
 struct CalendarDayOfWeekCell: View {
     let text: String

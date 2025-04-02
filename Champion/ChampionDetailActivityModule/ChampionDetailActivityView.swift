@@ -197,6 +197,8 @@ struct ChampionDetailActivityView: View {
         }
     }
 }
+
+
 #Preview {
     let activ = ActivityModel(image: "", label: "", text: "", color: .white)
     return ChampionDetailActivityView(selectedActivity: activ)

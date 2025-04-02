@@ -13,6 +13,7 @@ class ChampionCreateActivityViewModel: ObservableObject {
         generateWeek()
     }
     
+    
     let dayOfWeek: [String] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     private let calendar = Calendar.current
     @Published var currentDate = Date()
