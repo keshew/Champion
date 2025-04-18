@@ -46,7 +46,7 @@ class ChampionProfileViewModel: ObservableObject {
                         UserDefaultsManager().saveLoginStatus(false)
                         UserDefaultsManager().deletePhone()
                         UserDefaultsManager().deletePassword()
-                        UserDefaultsManager().deleteAllTasks()
+                        
                         completion(true)
                         DispatchQueue.main.async {
                             self?.isOut = true
@@ -55,7 +55,7 @@ class ChampionProfileViewModel: ObservableObject {
                         UserDefaultsManager().saveLoginStatus(false)
                         UserDefaultsManager().deletePhone()
                         UserDefaultsManager().deletePassword()
-                        UserDefaultsManager().deleteAllTasks()
+                        
                         completion(true)
                         DispatchQueue.main.async {
                             self?.isOut = true

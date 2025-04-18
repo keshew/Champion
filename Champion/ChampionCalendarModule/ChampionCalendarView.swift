@@ -97,7 +97,7 @@ struct ChampionCalendarView: View {
                                     VStack(spacing: 8.5) {
                                         ForEach(championCalendarModel.contact.timeArray.indices,
                                                 id: \.self) { index in
-                                            let tasks = championCalendarModel.tasks
+                                            let tasks = championCalendarModel.activity
                                                 let task = tasks.first(where: { formatTime($0.time) == championCalendarModel.contact.timeArray[index] })
                                                 if let task = task {
                                                     FulledModelTask(task: task, time: championCalendarModel.contact.timeArray[index])
@@ -202,8 +202,9 @@ struct ChampionCalendarView: View {
 
 struct CalendarView: View {
     var geometry: GeometryProxy
-    var championCalendarModel = ChampionCalendarViewModel()
+    @ObservedObject var championCalendarModel: ChampionCalendarViewModel
     var userDefaultsManager = UserDefaultsManager()
+    
     var body: some View {
         ZStack {
             Color(red: 0/255, green: 0/255, blue: 84/255)
@@ -313,46 +314,51 @@ struct CalendarView: View {
                     Spacer()
                 }
                 
-                if let tasks = userDefaultsManager.loadTasks() {
-                    let selectedDateTasks = tasks.filter { Calendar.current.isDate($0.date, inSameDayAs: championCalendarModel.selectedDate ?? Date()) }
-                    
-                    if !selectedDateTasks.isEmpty {
-                        ForEach(selectedDateTasks) { task in
-                            ZStack {
-                                Rectangle()
-                                    .fill(Color(red: 26/255, green: 26/255, blue: 101/255))
-                                    .frame(height: 56)
-                                    .cornerRadius(8)
-                                
-                                HStack {
-                                    Circle()
-                                        .fill(getColor(for: task.typeActivity))
-                                        .frame(width: 8, height: 8)
-                                    
-                                    Text(task.typeActivity.rawValue)
-                                        .PopBold(size: 16)
-                                        .padding(.leading, 5)
-                                    
-                                    Spacer()
-                                    
-                                    Text(formatTime(task.time))
-                                        .Pop(size: 14, color: Color(red: 77/255, green: 77/255, blue: 136/255))
-                                        .padding(.trailing)
-                                }
-                                .padding(.leading)
-                            }
-                            .padding(.horizontal)
-                        }
-                    } else {
-                        Text("No tasks available for today")
-                            .PopBold(size: 20)
-                            .padding()
-                    }
-                } else {
-                    Text("No tasks available")
-                        .PopBold(size: 20)
-                        .padding()
-                }
+                if championCalendarModel.activity.isEmpty {
+                           Text("No tasks available")
+                               .PopBold(size: 20)
+                               .padding()
+                       } else {
+                           let selectedDate = championCalendarModel.selectedDate ?? Date()
+                           let selectedDateTasks = championCalendarModel.activity.filter { Calendar.current.isDate($0.date, inSameDayAs: selectedDate) }
+                           
+                           if selectedDateTasks.isEmpty {
+                               Text("No tasks available for today")
+                                   .PopBold(size: 20)
+                                   .padding()
+                           } else {
+                               ScrollView {
+                                   VStack(spacing: 8) {
+                                       ForEach(selectedDateTasks) { task in
+                                           ZStack {
+                                               Rectangle()
+                                                   .fill(Color(red: 26/255, green: 26/255, blue: 101/255))
+                                                   .frame(height: 56)
+                                                   .cornerRadius(8)
+                                               
+                                               HStack {
+                                                   Circle()
+                                                       .fill(getColor(for: task.typeActivity))
+                                                       .frame(width: 8, height: 8)
+                                                   
+                                                   Text(task.typeActivity.rawValue)
+                                                       .PopBold(size: 16)
+                                                       .padding(.leading, 5)
+                                                   
+                                                   Spacer()
+                                                   
+                                                   Text(formatTime(task.time))
+                                                       .Pop(size: 14, color: Color(red: 77/255, green: 77/255, blue: 136/255))
+                                                       .padding(.trailing)
+                                               }
+                                               .padding(.leading)
+                                           }
+                                       }
+                                   }
+                                   .padding(.horizontal)
+                               }
+                           }
+                       }
                 
                 Color(.clear)
                     .frame(height: 140)
@@ -381,6 +387,14 @@ struct CalendarView: View {
             .disabled(userDefaultsManager.isGuest() ? true : false)
             .opacity(userDefaultsManager.isGuest() ? 0.5 : 1)
             .position(x: geometry.size.width / 2, y: geometry.size.height / 1.16)
+        }
+        .onAppear {
+            NotificationCenter.default.addObserver(forName: .didSaveTask, object: nil, queue: .main) { _ in
+                championCalendarModel.loadTasks()
+            }
+        }
+        .onDisappear {
+            NotificationCenter.default.removeObserver(self, name: .didSaveTask, object: nil)
         }
     }
     
@@ -429,6 +443,7 @@ struct CalendarView: View {
           }
       }
 }
+
 
 struct CalendarDayCell: View {
     let text: String
@@ -511,6 +526,4 @@ struct CalendarDayCell: View {
         }
     }
 }
-
-
 

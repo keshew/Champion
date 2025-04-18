@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TaskModel: Identifiable, Codable {
+struct TaskModel: Identifiable, Codable, Equatable {
     var id = UUID().uuidString
     var typeActivity: TypeActivity
     var date: Date

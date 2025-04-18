@@ -7,5 +7,3 @@ struct ChampionOnboardingModel {
                        "Easily book football courts, swimming\nsessions, gym access, massages, and\nmore—all in one place.",
                        "View and manage all your bookings in\nthe club calendar. Stay on top of your\nschedule effortlessly."]
 }
-
-

@@ -212,8 +212,6 @@ struct FulledModelTask: View {
     }
 }
 
-
-
 struct CustomTextFiled: View {
     @Binding var text: String
     @FocusState var isTextFocused: Bool

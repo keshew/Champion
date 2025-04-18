@@ -9,6 +9,7 @@ class ChampionCreateActivityViewModel: ObservableObject {
     @Published var week: [Date] = []
     @Published var showIncompleteSelectionAlert = false
     @Published var selectedTime: String = ""
+    @Published var isTab = false
     init() {
         generateWeek()
     }

@@ -128,7 +128,6 @@ struct ChampionProfileView: View {
                             UserDefaultsManager().saveLoginStatus(false)
                             UserDefaultsManager().deletePhone()
                             UserDefaultsManager().deletePassword()
-                            UserDefaultsManager().deleteAllTasks()
                             if UserDefaultsManager().isGuest() {
                                 UserDefaultsManager().quitQuest()
                             }

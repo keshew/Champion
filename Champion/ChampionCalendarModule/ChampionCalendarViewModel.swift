@@ -10,10 +10,49 @@ class ChampionCalendarViewModel: ObservableObject {
     @Published var tasks: [TaskModel] = []
     var userDefaultsManager = UserDefaultsManager()
     @Published var selectedDate: Date?
+    @Published var activity: [TaskModel] = []
+    let networkService = NetworkService()
     
     init() {
         generateDates()
         loadTasksForDate()
+        loadTasks()
+    }
+    
+    func loadTasks() {
+        guard let phone = userDefaultsManager.getEmail(),
+              let password = userDefaultsManager.getPassword() else {
+            self.activity = []
+            return
+        }
+        networkService.getTasks(phone: phone, password: password) { [weak self] response, error in
+            DispatchQueue.main.async {
+                if let _ = error {
+                    self?.activity = []
+                    return
+                }
+                guard let serverTasks = response?.tasks else {
+                    self?.activity = []
+                    return
+                }
+                
+                self?.activity = serverTasks.compactMap { self?.convertServerTaskToTaskModel($0) }
+            }
+        }
+    }
+    
+    func convertServerTaskToTaskModel(_ serverTask: ServerTask) -> TaskModel? {
+        let dateFormatter = ISO8601DateFormatter()
+        guard let date = dateFormatter.date(from: serverTask.date) else { return nil }
+        guard let typeActivity = TypeActivity(rawValue: serverTask.typeactivity) else { return nil }
+        let time = date
+        
+        return TaskModel(
+            id: serverTask.id,
+            typeActivity: typeActivity,
+            date: date,
+            time: time
+        )
     }
     
     private let calendar = Calendar.current

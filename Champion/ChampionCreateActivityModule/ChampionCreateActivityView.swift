@@ -1,9 +1,16 @@
 import SwiftUI
 
+extension Notification.Name {
+    static let didSaveTask = Notification.Name("didSaveTask")
+}
+
 struct ChampionCreateActivityView: View {
     @StateObject var championCreateActivityModel = ChampionCreateActivityViewModel()
     @Environment(\.presentationMode) var presentationMode
     var userDefaultsManager = UserDefaultsManager()
+    @State private var showErrorAlert = false
+    @State private var errorMessage = ""
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -185,8 +192,38 @@ struct ChampionCreateActivityView: View {
                                     time: championCreateActivityModel.getTime()
                                 )
                                 
+                                let dateFormatter = ISO8601DateFormatter()
+                                let selectedDateTime = Calendar.current.date(bySettingHour: Int(championCreateActivityModel.selectedTime.components(separatedBy: ":").first ?? "0") ?? 0, minute: 0, second: 0, of: championCreateActivityModel.selectedDate ?? Date())!
+                                let isoDateString = dateFormatter.string(from: selectedDateTime)
+                                
                                 NotificationManager.shared.scheduleNotificationEvent(event: task)
                                 userDefaultsManager.appendTask(task)
+                                NetworkService().saveTask(phone: userDefaultsManager.getEmail() ?? "",
+                                                          password: userDefaultsManager.getPassword() ?? "",
+                                                          date: isoDateString,
+                                                          typeactivity: championCreateActivityModel.getActivityType().rawValue) { response, error in
+                                    if let error = error {
+                                        errorMessage = "Failed to save task: \(error.localizedDescription)"
+                                        showErrorAlert = true
+                                        return
+                                    }
+                                    
+                                    if let response = response, let _ = response.message {
+                                        let task = TaskModel(
+                                            typeActivity: championCreateActivityModel.getActivityType(),
+                                            date: championCreateActivityModel.selectedDate ?? Date(),
+                                            time: championCreateActivityModel.getTime()
+                                        )
+                                        NotificationCenter.default.post(name: .didSaveTask, object: nil)
+                                        NotificationManager.shared.scheduleNotificationEvent(event: task)
+                                    } else if let response = response, let error = response.error {
+                                        errorMessage = "Failed to save task: \(error)"
+                                        showErrorAlert = true
+                                    } else {
+                                        errorMessage = "Unknown error occurred while saving the task."
+                                        showErrorAlert = true
+                                    }
+                                }
                                 presentationMode.wrappedValue.dismiss()
                             }
                         }) {
