@@ -14,9 +14,15 @@ struct ChampionLoginView: View {
                     VStack {
                         Spacer(minLength: 80)
                         
-                        Image(.champLabel)
-                            .resizable()
-                            .frame(width: 179, height: 201)
+                        VStack(spacing: 0) {
+                            Image(.imageStar)
+                                .resizable()
+                                .frame(width: 140, height: 140)
+                            
+                            Text("ChampClub")
+                                .PopBold(size: 27)
+                        }
+                        .frame(width: 179, height: 201)
                         
                         Spacer(minLength: 40)
                         

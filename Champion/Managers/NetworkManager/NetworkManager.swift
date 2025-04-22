@@ -35,7 +35,6 @@ struct TaskResponse: Decodable {
     let tasks: [ServerTask]?
 }
 
-
 class NetworkService {
     let host = "https://championdiary.space"
     let loginPath = "/login.php"

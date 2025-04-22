@@ -444,7 +444,6 @@ struct CalendarView: View {
       }
 }
 
-
 struct CalendarDayCell: View {
     let text: String
     var isCurrentMonth: Bool = true
