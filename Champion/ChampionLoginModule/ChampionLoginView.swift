@@ -106,31 +106,6 @@ struct ChampionLoginView: View {
                                     }
                                 }
                             }
-                            
-                            Button(action: {
-                                UserDefaultsManager().enterAsGuest()
-                                if UserDefaultsManager().isFirstLaunch() {
-                                    championLoginModel.isOnb = true
-                                } else {
-                                    championLoginModel.isTab = true
-                                }
-                            }) {
-                                ZStack {
-                                    Rectangle()
-                                        .fill(.clear)
-                                        .frame(height: 56)
-                                        .cornerRadius(8)
-                                        .padding(.horizontal, 20)
-                                        .overlay {
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(Color(red: 0/255, green: 255/255, blue: 255/255), lineWidth: 1)
-                                                .padding(.horizontal, 20)
-                                        }
-                                    
-                                    Text("Guest mode")
-                                        .PopBold(size: 16, color: Color(red: 0/255, green: 255/255, blue: 255/255))
-                                }
-                            }
                         }
                         
                         Spacer(minLength: 25)

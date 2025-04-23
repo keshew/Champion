@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		86C40CA92D99DCB100B0BC0A /* Champion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Champion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86C40CA92D99DCB100B0BC0A /* ChampClub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChampClub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		86C40D2C2D99DE5E00B0BC0A /* Exceptions for "Champion" folder in "Champion" target */ = {
+		86C40D2C2D99DE5E00B0BC0A /* Exceptions for "Champion" folder in "ChampClub" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 86C40CA82D99DCB100B0BC0A /* Champion */;
+			target = 86C40CA82D99DCB100B0BC0A /* ChampClub */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -24,7 +24,7 @@
 		86C40CAB2D99DCB100B0BC0A /* Champion */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				86C40D2C2D99DE5E00B0BC0A /* Exceptions for "Champion" folder in "Champion" target */,
+				86C40D2C2D99DE5E00B0BC0A /* Exceptions for "Champion" folder in "ChampClub" target */,
 			);
 			path = Champion;
 			sourceTree = "<group>";
@@ -53,7 +53,7 @@
 		86C40CAA2D99DCB100B0BC0A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86C40CA92D99DCB100B0BC0A /* Champion.app */,
+				86C40CA92D99DCB100B0BC0A /* ChampClub.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		86C40CA82D99DCB100B0BC0A /* Champion */ = {
+		86C40CA82D99DCB100B0BC0A /* ChampClub */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 86C40CB72D99DCB200B0BC0A /* Build configuration list for PBXNativeTarget "Champion" */;
+			buildConfigurationList = 86C40CB72D99DCB200B0BC0A /* Build configuration list for PBXNativeTarget "ChampClub" */;
 			buildPhases = (
 				86C40CA52D99DCB100B0BC0A /* Sources */,
 				86C40CA62D99DCB100B0BC0A /* Frameworks */,
@@ -76,11 +76,11 @@
 			fileSystemSynchronizedGroups = (
 				86C40CAB2D99DCB100B0BC0A /* Champion */,
 			);
-			name = Champion;
+			name = ChampClub;
 			packageProductDependencies = (
 			);
 			productName = Champion;
-			productReference = 86C40CA92D99DCB100B0BC0A /* Champion.app */;
+			productReference = 86C40CA92D99DCB100B0BC0A /* ChampClub.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 86C40CA42D99DCB100B0BC0A /* Build configuration list for PBXProject "Champion" */;
+			buildConfigurationList = 86C40CA42D99DCB100B0BC0A /* Build configuration list for PBXProject "ChampClub" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				86C40CA82D99DCB100B0BC0A /* Champion */,
+				86C40CA82D99DCB100B0BC0A /* ChampClub */,
 			);
 		};
 /* End PBXProject section */
@@ -322,7 +322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		86C40CA42D99DCB100B0BC0A /* Build configuration list for PBXProject "Champion" */ = {
+		86C40CA42D99DCB100B0BC0A /* Build configuration list for PBXProject "ChampClub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86C40CB52D99DCB200B0BC0A /* Debug */,
@@ -331,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		86C40CB72D99DCB200B0BC0A /* Build configuration list for PBXNativeTarget "Champion" */ = {
+		86C40CB72D99DCB200B0BC0A /* Build configuration list for PBXNativeTarget "ChampClub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86C40CB82D99DCB200B0BC0A /* Debug */,
