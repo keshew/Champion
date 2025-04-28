@@ -13,13 +13,15 @@ struct ChampionNewsView: View {
                 ScrollView(showsIndicators: false) {
                     VStack {
                         HStack {
-                            Button(action: {
-                                presentationMode.wrappedValue.dismiss()
-                            }) {
-                                Image(.leftArrow3)
-                                    .resizable()
-                                    .frame(width: 18, height: 20)
-                                    .padding(.leading)
+                            if !UserDefaultsManager().checkLogin() {
+                                Button(action: {
+                                    presentationMode.wrappedValue.dismiss()
+                                }) {
+                                    Image(.leftArrow3)
+                                        .resizable()
+                                        .frame(width: 18, height: 20)
+                                        .padding(.leading)
+                                }
                             }
                             
                             Spacer()
