@@ -12,6 +12,8 @@ struct ChampionTabBarView: View {
                     ChampionActivityView()
                 } else if selectedTab == .Profile {
                     ChampionProfileView()
+                } else if selectedTab == .Code {
+                    ChampionCodeView()
                 }
             }
             .frame(maxHeight: .infinity)
@@ -36,6 +38,7 @@ struct CustomTabBar: View {
     enum TabType: Int {
         case Calendar
         case Tasks
+        case Code
         case Profile
     }
     
@@ -67,7 +70,8 @@ struct CustomTabBar: View {
             HStack(spacing: 0) {
                 TabBarItem(imageName: "tab1", tab: .Calendar, selectedTab: $selectedTab)
                 TabBarItem(imageName: "tab2", tab: .Tasks, selectedTab: $selectedTab)
-                TabBarItem(imageName: "tab3", tab: .Profile, selectedTab: $selectedTab)
+                TabBarItem(imageName: "tab3", tab: .Code, selectedTab: $selectedTab)
+                TabBarItem(imageName: "tab4", tab: .Profile, selectedTab: $selectedTab)
             }
             .padding(.top, 5)
             .frame(height: 60)
@@ -89,6 +93,11 @@ struct TabBarItem: View {
                     Image(selectedTab == tab ? imageName + "Picked" : imageName)
                         .resizable()
                         .frame(width: 32, height: 26)
+                        .opacity(selectedTab == tab ? 1 : 0.4)
+                } else if tab == CustomTabBar.TabType.Code {
+                    Image(selectedTab == tab ? imageName + "Picked" : imageName)
+                        .resizable()
+                        .frame(width: 28, height: 28)
                         .opacity(selectedTab == tab ? 1 : 0.4)
                 } else {
                     Image(selectedTab == tab ? imageName + "Picked" : imageName)

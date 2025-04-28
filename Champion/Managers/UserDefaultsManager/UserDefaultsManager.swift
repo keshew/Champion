@@ -45,21 +45,6 @@ class UserDefaultsManager: ObservableObject {
         defaults.removeObject(forKey: "tasks")
     }
     
-    func enterAsGuest() {
-        let defaults = UserDefaults.standard
-        defaults.set(true, forKey: "guest")
-    }
-    
-    func isGuest() -> Bool {
-        let defaults = UserDefaults.standard
-        return defaults.bool(forKey: "guest")
-    }
-    
-    func quitQuest() {
-        let defaults = UserDefaults.standard
-        defaults.set(false, forKey: "guest")
-    }
-    
     func checkLogin() -> Bool {
         let defaults = UserDefaults.standard
         return defaults.bool(forKey: "isLoggedIn")

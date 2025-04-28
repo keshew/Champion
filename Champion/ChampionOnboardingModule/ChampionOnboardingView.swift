@@ -11,9 +11,9 @@ struct ChampionOnboardingView: View {
                 
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        Image(.champLabel)
+                        Image(.champLabel2)
                             .resizable()
-                            .frame(width: 93, height: 104)
+                            .frame(width: 67, height: 114)
                         
                         Spacer(minLength: 30)
                         

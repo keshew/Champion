@@ -9,6 +9,7 @@ class ChampionSignInViewModel: ObservableObject {
     @Published var isLog = false
     @Published var isTab = false
     @Published var isOnb = false
+    @Published var isNew = false
     
     func register() -> Bool {
         guard !phone.isEmpty else {

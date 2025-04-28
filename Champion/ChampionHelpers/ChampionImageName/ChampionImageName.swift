@@ -8,5 +8,7 @@ public enum ChampionImageName: String {
     case div, div2, div3, div4, div5, div6, div7, div8, div9
     case rightArrow4, leftArrow4, checkmarkCustom
     case id, member, notif
-    case tab3Picked, tab3, tab2Picked, tab2, tab1Picked, tab1
+    case tab3Picked, tab3, tab2Picked, tab2, tab1Picked, tab1, tab4, tab4Picked
+    case anotherStar, champLabel2, qr1, qr2
+    case share, refresh, swim, edc, star, sportic, joga
 }

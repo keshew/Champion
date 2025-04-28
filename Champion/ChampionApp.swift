@@ -10,7 +10,6 @@ struct ChampionApp: App {
             } else {
                 ChampionSignInView()
                     .onAppear {
-                        UserDefaultsManager().quitQuest()
                         notificationManager.requestPermission { granted in
                         }
                     }

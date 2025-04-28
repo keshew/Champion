@@ -145,8 +145,6 @@ struct ChampionCalendarView: View {
                             }
                         }
                     }
-                    .disabled(userDefaultsManager.isGuest() ? true : false)
-                    .opacity(userDefaultsManager.isGuest() ? 0.5 : 1)
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 1.16)
                     
                     ZStack {
@@ -384,8 +382,6 @@ struct CalendarView: View {
                     }
                 }
             }
-            .disabled(userDefaultsManager.isGuest() ? true : false)
-            .opacity(userDefaultsManager.isGuest() ? 0.5 : 1)
             .position(x: geometry.size.width / 2, y: geometry.size.height / 1.16)
         }
         .onAppear {

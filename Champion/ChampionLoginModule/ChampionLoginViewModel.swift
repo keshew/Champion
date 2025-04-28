@@ -8,6 +8,7 @@ class ChampionLoginViewModel: ObservableObject {
     @Published var alertMessage = ""
     @Published var isTab = false
     @Published var isOnb = false
+    @Published var isNew = false
 
     func login(completion: @escaping (Bool) -> Void) {
         guard !phone.isEmpty else {

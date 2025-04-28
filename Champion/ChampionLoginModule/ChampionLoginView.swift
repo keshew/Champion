@@ -14,10 +14,11 @@ struct ChampionLoginView: View {
                     VStack {
                         Spacer(minLength: 80)
                         
-                        VStack(spacing: 0) {
-                            Image(.imageStar)
+                        VStack(spacing: 30) {
+                            Image(.anotherStar)
                                 .resizable()
-                                .frame(width: 140, height: 140)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 121, height: 110)
                             
                             Text("ChampClub")
                                 .PopBold(size: 27)
@@ -106,6 +107,26 @@ struct ChampionLoginView: View {
                                     }
                                 }
                             }
+                            
+                            Button(action: {
+                                championLoginModel.isNew = true
+                            }) {
+                                ZStack {
+                                    Rectangle()
+                                        .fill(.clear)
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color(red: 0/255, green: 255/255, blue: 255/255), lineWidth: 2)
+                                        }
+                                        .frame(height: 56)
+                                        .cornerRadius(8)
+                                        .padding(.horizontal, 20)
+                                       
+                                    
+                                    Text("Club news")
+                                        .PopBold(size: 16, color: Color(red: 0/255, green: 255/255, blue: 255/255))
+                                }
+                            }
                         }
                         
                         Spacer(minLength: 25)
@@ -139,6 +160,10 @@ struct ChampionLoginView: View {
             }
             .fullScreenCover(isPresented: $championLoginModel.isTab) {
                 ChampionTabBarView()
+            }
+            
+            .fullScreenCover(isPresented: $championLoginModel.isNew) {
+                ChampionNewsView()
             }
         }
     }

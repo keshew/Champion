@@ -13,25 +13,14 @@ struct ChampionProfileView: View {
                     VStack {
                         HStack {
                             VStack(alignment: .leading) {
-                                if UserDefaultsManager().isGuest() {
-                                    Text("Guest")
-                                        .PopBold(size: 28)
-                                        .padding(.leading)
-                                    
-                                    Text("Guest Member")
-                                        .PopBold(size: 20,
-                                                 color: Color(red: 153/255, green: 153/255, blue: 186/255))
-                                        .padding(.leading)
-                                } else {
-                                    Text("User")
-                                        .PopBold(size: 28)
-                                        .padding(.leading)
-                                    
-                                    Text("Premium Member")
-                                        .PopBold(size: 20,
-                                                 color: Color(red: 153/255, green: 153/255, blue: 186/255))
-                                        .padding(.leading)
-                                }
+                                Text("User")
+                                    .PopBold(size: 28)
+                                    .padding(.leading)
+                                
+                                Text("Premium Member")
+                                    .PopBold(size: 20,
+                                             color: Color(red: 153/255, green: 153/255, blue: 186/255))
+                                    .padding(.leading)
                             }
                             Spacer()
                         }
@@ -55,15 +44,9 @@ struct ChampionProfileView: View {
                                     
                                     Spacer()
                                     
-                                    if UserDefaultsManager().isGuest() {
-                                        Text("Guest")
-                                            .PopBold(size: 16,
-                                                     color: Color(red: 0/255, green: 255/255, blue: 255/255))
-                                    } else {
-                                        Text("EC25498")
-                                            .PopBold(size: 16,
-                                                     color: Color(red: 0/255, green: 255/255, blue: 255/255))
-                                    }
+                                    Text("EC25498")
+                                        .PopBold(size: 16,
+                                                 color: Color(red: 0/255, green: 255/255, blue: 255/255))
                                 }
                                 .padding(.horizontal)
                                 
@@ -77,15 +60,9 @@ struct ChampionProfileView: View {
                                     
                                     Spacer()
                                     
-                                    if UserDefaultsManager().isGuest() {
-                                        Text("Guest")
-                                            .PopBold(size: 16,
-                                                     color: Color(red: 0/255, green: 255/255, blue: 255/255))
-                                    } else {
-                                        Text("Active")
-                                            .PopBold(size: 16,
-                                                     color: Color(red: 0/255, green: 255/255, blue: 255/255))
-                                    }
+                                    Text("Active")
+                                        .PopBold(size: 16,
+                                                 color: Color(red: 0/255, green: 255/255, blue: 255/255))
                                  
                                 }
                                 .padding(.horizontal)
@@ -121,16 +98,13 @@ struct ChampionProfileView: View {
                         .frame(height: 53)
                         .padding(.horizontal)
                         
-                        Spacer(minLength: UserDefaultsManager().isGuest() ? 360 : 280)
+                        Spacer(minLength: 280)
                         
                         Button(action: {
                             championProfileModel.isOut = true
                             UserDefaultsManager().saveLoginStatus(false)
                             UserDefaultsManager().deletePhone()
                             UserDefaultsManager().deletePassword()
-                            if UserDefaultsManager().isGuest() {
-                                UserDefaultsManager().quitQuest()
-                            }
                         }) {
                             ZStack {
                                 Rectangle()
@@ -150,8 +124,7 @@ struct ChampionProfileView: View {
                         .padding(.horizontal)
                         
                         Spacer(minLength: 20)
-                        
-                        if !UserDefaultsManager().isGuest() {
+                 
                             Button(action: {
                                 championProfileModel.deleteUser { success in
                                     if success {
@@ -175,8 +148,7 @@ struct ChampionProfileView: View {
                                 }
                             }
                             .padding(.horizontal)
-                        }
-                        
+                       
                         Color(.clear)
                             .frame(height: 60)
                     }
