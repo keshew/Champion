@@ -48,6 +48,9 @@ struct ChampionNewsView: View {
                                     }
                             }
                         }
+                        
+                        Color(.clear)
+                            .frame(height: 70)
                     }
                 }
             }
