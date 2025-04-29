@@ -269,12 +269,6 @@ struct CalendarView: View {
                 }
                 .padding(.top)
                 
-                HStack(spacing: geometry.size.width * 0.079) {
-                    ForEach(0..<7, id: \.self) { i in
-                        CalendarDayOfWeekCell(text: championCalendarModel.daysOfWeek[i], geometry: geometry)
-                    }
-                }
-                
                 ForEach(championCalendarModel.dates.indices, id: \.self) { weekIndex in
                     HStack(spacing: getSpacing(for: geometry.size.width)) {
                         ForEach(0..<7, id: \.self) { dayIndex in

@@ -131,7 +131,7 @@ struct ChampionNewDetailView: View {
                         
                         HStack(spacing: -10) {
                             Button(action: {
-                                presentationMode.wrappedValue.dismiss()
+                                championNewDetailModel.isBook = true
                             }) {
                                 Rectangle()
                                     .fill(Color(red: 0/255, green: 255/255, blue: 255/255))
@@ -167,6 +167,9 @@ struct ChampionNewDetailView: View {
             .sheet(isPresented: $isShareSheetShowing) {
                 //MARK: - url
                 ShareSheet(items: [""])
+            }
+            .fullScreenCover(isPresented: $championNewDetailModel.isBook) {
+                ChampionCreateActivityView()
             }
         }
     }
